@@ -36,13 +36,13 @@ exports.handler = async (event) => {
       'Style: beautiful, detailed, premium, decorative, polished, elegant botanical marketing artwork.'
     ].join(' ');
 
-    const requestBody = {
-      model: process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1',
-      size,
-      quality: 'high',
-      output_format: 'png',
-      prompt
-    };
+   const requestBody = {
+  model: process.env.OPENAI_IMAGE_MODEL || 'dall-e-3',
+  size: '1792x1024',          // closest valid landscape size
+  quality: 'hd',              // was 'high' — invalid for dall-e-3
+  response_format: 'b64_json', // was output_format: 'png' — wrong param name
+  prompt
+};
 
     const response = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
